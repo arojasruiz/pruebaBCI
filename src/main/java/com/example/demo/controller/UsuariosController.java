@@ -92,8 +92,11 @@ public class UsuariosController {
 		user.setCreated(dateStr);
 		user.setActive(true);
 		user.setLastLogin(dateStr);
-		user.setToken("1234");
-		createUser = service.createUsers(user);
+		//user.setToken("1234");
+        String token = jwtUtil.generateToken(user.getEmail());
+        user.setToken(token);
+
+        createUser = service.createUsers(user);
 		for(PhonesRequest phones : request.getPhones()) {
 			phone = new Phones();
 			phone.setPhone(phones.getPhone());
@@ -103,7 +106,11 @@ public class UsuariosController {
 			phoneRepo.save(phone);
 			
 		}
-		return createUser; 		
+
+        boolean valid = jwtUtil.validateToken(token, user.getEmail());
+        System.out.println("Token válido: " + valid);
+
+        return createUser;
 	}
 
 }

@@ -8,7 +8,9 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 repositories {
@@ -16,29 +18,26 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'	
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
-	// Dependencias para JWT
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2' // Usar jackson para parsear JSON
-    // Dependencia para Springdoc OpenAPI
-    implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
-    implementation 'org.springdoc:springdoc-openapi-security:1.6.14'
-    
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	//implementation 'org.springframework.boot:spring-boot-starter-security'
-	// Dependencias para JWT
-    //implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-    //runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-    //runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
 
-tasks.named('test') {
-	useJUnitPlatform()
+    // Core Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Base de datos en memoria
+    runtimeOnly 'com.h2database:h2'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+    // OpenAPI / Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+    // DevTools
+    //developmentOnly 'org.springframework.boot:spr
 }
