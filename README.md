@@ -86,6 +86,31 @@ al iniciar la aplicación según las entidades definidas en `model/`.
 
 ---
 
+## Ejecución del proyecto
+
+Sigue estos pasos para clonar, ejecutar y probar la API:
+
+1. **Clonar el repositorio y cambiar a la rama MASTER con el código:**
+
+```bash
+
+git clone <URL_DEL_REPO>
+git checkout master
+
+```
+
+2. **Abrir el proyecto en tu IDE**
+   - Puedes usar Spring Tools Suite, IntelliJ IDEA, Eclipse u otro IDE compatible con Spring Boot.
+   
+3. **Ejecutar el comando**
+```bash
+  ./gradlew bootRun
+```
+- o desde el IDE, ejecutar la clase principal Application.java.
+
+4. **Acceder a Swagger o usar Postman para probar los endpoints.**
+---
+
 ## Endpoints 
 
 ### Registrar usuario
@@ -136,20 +161,7 @@ al iniciar la aplicación según las entidades definidas en `model/`.
 
 ---
 
-## Ejecución del proyecto
 
-- Clonar o descargar el repositorio.
-
-- Abrir el proyecto en tu IDE (Spring Tools Suite, IntelliJ, etc.).
-
-- Ejecutar el comando:
-```bash
-  ./gradlew bootRun
-```
-o desde el IDE, ejecutar la clase principal Application.java.
-
-- Acceder a Swagger o usar Postman para probar los endpoints.
----
 
 ## Swagger UI
 
