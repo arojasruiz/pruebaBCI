@@ -34,7 +34,7 @@ jwt.secret=my_super_secret_key_that_is_long_enough_to_be_valid
 
 ### Estructura del proyecto
 ```txt
-proyecto/
+demo-1/
 │
 ├── README.md
 ├── docs/
