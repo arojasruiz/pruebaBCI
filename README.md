@@ -5,7 +5,7 @@ La aplicación utiliza **H2 Database** como base de datos en memoria y **Swagger
 
 ---
 
-## 🚀 Tecnologías utilizadas
+## Tecnologías utilizadas
 - **Java 17**
 - **Spring Boot 3.2.5**
 - **Spring Data JPA**
@@ -16,7 +16,7 @@ La aplicación utiliza **H2 Database** como base de datos en memoria y **Swagger
 
 ---
 
-## ⚙️ Configuración del entorno
+## Configuración del entorno
 
 ### Requisitos previos
 - Java **17+**
@@ -30,34 +30,53 @@ En el archivo `src/main/resources/application.properties` debe existir la siguie
 ```properties
 jwt.secret=my_super_secret_key_that_is_long_enough_to_be_valid
 ```
+---
 
-### 🧠 Estructura del proyecto
+### Estructura del proyecto
 ```txt
-src/main/java/com/example/
+proyecto/
 │
-├── controller/
-│   └── UsuariosController.java
-│
-├── model/
-│   ├── Users.java
-│   └── Phones.java
-│
-├── repository/
-│   ├── UserRepository.java
-│   └── PhoneRepository.java
-│
-├── service/
-│   └── UserService.java
-│
-├── security/
-│   └── JwtUtil.java
-│
-└── exception/
-    └── UserCustomErrorException.java
+├── README.md
+├── docs/
+│   └── diagrama-uml.png
+└── src/main/java/com/example/demo
+    ├── controller/
+    │   └── UsuariosController.java
+    │
+    ├── dto/
+    │   ├── request/
+    │   │   ├── UserRequest.java
+    │   │   └── PhoneRequest.java
+    │   │
+    │   └── response/
+    │       └── UserResponse.java       
+    │
+    ├── model/
+    │   ├── Users.java
+    │   └── Phones.java
+    │
+    ├── repository/
+    │   ├── UserRepository.java
+    │   └── PhoneRepository.java
+    │
+    ├── service/
+    │   └── UserServiceImpl.java
+    │
+    ├── util/
+    │   └── JwtUtil.java
+    │
+    └── exception/
+        ├── ErrorResponse.java
+        └── UserCustomErrorException.java
+
 ```
 ---
 
-## 💾 Base de datos H2
+## Base de datos H2
+
+Este proyecto utiliza **H2 en memoria** junto con **Spring Data JPA**.  
+No se requieren scripts SQL manuales, ya que las tablas se generan automáticamente 
+al iniciar la aplicación según las entidades definidas en `model/`.
 
 - **Consola H2:** http://localhost:8080/h2-console
 - **Driver:** `org.h2.Driver`
@@ -67,9 +86,9 @@ src/main/java/com/example/
 
 ---
 
-## 📘 Endpoints principales
+## Endpoints 
 
-### 1️⃣ Registrar usuario
+### Registrar usuario
 
 **POST** `/users/create`
 
@@ -81,7 +100,7 @@ src/main/java/com/example/
   "password": "Andrea123",
   "phones": [
     {
-      "phone": "12345678",
+      "number": "12345678",
       "citycode": "1",
       "contrycode": "56"
     }
@@ -91,44 +110,33 @@ src/main/java/com/example/
 #### Ejemplo de response exitoso:
 ```json
 {
+  "id": 1,
   "name": "Andrea",
-  "email": "andra@gmail.cl",
-  "password": "Andrea123",
-  "phones": [
-    {
-      "phone": "12345678",
-      "citycode": "1",
-      "contrycode": "56"
-    }
-  ]
+  "email": "andrea@gmail.com",
+  "created": "25-11-04 22:59:57",
+  "modified": "25-11-04 22:59:57",
+  "lastLogin": "25-11-04 22:59:57",
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmRyZWFAZ21haWwuY29tIiwiaWF0IjoxNzYyMzA3OTk4LCJleHAiOjE3NjIzNDM5OTh9.CST7JGUCOODfeE_1orAB2xnR4Tbq6eZPKW9Dniee--0",
+  "active": true
 }
 ```
 #### Response en caso de error (email inválido):
 ```json
 {
-  "mensaje": "El Email andra.cl no es correcto."
+  "mensaje": "El Email [email] no es correcto."
 }
 ```
 
-### 2️⃣ Generar token manualmente
-
-**GET** `/users/generateToken?username=usuario@correo.com`  
-- Devuelve un token JWT válido por 10 horas.
-
-### 3️⃣ Simular error personalizado
-
-**GET** `/users/error`
-- Devuelve una excepción personalizada con mensaje definido en la API.
+#### Response en caso de error (email existente):
+```json
+{
+  "mensaje": "El correo ya está registrado."
+}
+```
 
 ---
 
-## 🧭 Swagger UI
-
-- Una vez que el proyecto esté corriendo, puedes acceder a la documentación interactiva en:
-👉 http://localhost:8080/swagger-ui/index.html
----
-
-## 🧪 Ejecución del proyecto
+## Ejecución del proyecto
 
 - Clonar o descargar el repositorio.
 
@@ -143,43 +151,44 @@ o desde el IDE, ejecutar la clase principal Application.java.
 - Acceder a Swagger o usar Postman para probar los endpoints.
 ---
 
-## ✅ Funcionalidades implementadas
+## Swagger UI
+
+- Una vez que el proyecto esté corriendo, puedes acceder a la documentación interactiva en:
+  👉 http://localhost:8080/swagger-ui/index.html
+---
+
+## Diagrama UML del proyecto
+
+- ![Diagrama UML](docs/diagrama-uml.png)
+---
+
+
+## Funcionalidades implementadas
 
 - Registro de usuarios
 
 - Validación de formato de email
 
+- Validación de emai existente
+
 - Validación de contraseña segura
 
 - Persistencia en base de datos H2
 
+- Manejo de excepciones personalizadas
+
 - Generación de token JWT
+
+- Pruebas unitarias
 
 - Documentación Swagger
 
-- Manejo de excepciones personalizadas
-
-- Validación de token en endpoints protegidos (opcional)
+- Diagrama de la solución
 ---
 
-## 🧩 Tecnologías utilizadas
-
-- Java 17
-
-- Spring Boot 3.2.5
-
-- Gradle
-
-- H2 Database
-
-- JWT (io.jsonwebtoken)
-
-- Springdoc OpenAPI (Swagger UI)
-
-- Lombok
----
 
 ## 👩‍💻 Autor
 
 Andrea Rojas Ruiz
+
 Proyecto de Prueba Técnica — 2025

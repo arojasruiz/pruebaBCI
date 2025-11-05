@@ -6,7 +6,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Phones {
 	@Id
@@ -19,36 +27,4 @@ public class Phones {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private Users users;
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public int getPhone() {
-		return phone;
-	}
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
-	public int getCitycode() {
-		return citycode;
-	}
-	public void setCitycode(int citycode) {
-		this.citycode = citycode;
-	}
-	public String getContrycode() {
-		return contrycode;
-	}
-	public void setContrycode(String contrycode) {
-		this.contrycode = contrycode;
-	}
-	public Users getUsers() {
-		return users;
-	}
-	public void setUsers(Users users) {
-		this.users = users;
-	}
-	
 }
