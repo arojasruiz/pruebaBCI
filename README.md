@@ -106,7 +106,7 @@ git checkout master
 ```bash
   ./gradlew bootRun
 ```
-- o desde el IDE, ejecutar la clase principal Application.java.
+- o desde el IDE, ejecutar la clase principal Demo1Application.java.
 
 4. **Acceder a Swagger o usar Postman para probar los endpoints.**
 ---
